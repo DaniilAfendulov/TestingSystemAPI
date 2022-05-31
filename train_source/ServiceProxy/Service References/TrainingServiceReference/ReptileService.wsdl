@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IServiceInterface_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:14088/TrainingService/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:14088/TrainingService/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:14088/TrainingService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Common.Data.Users" />
+      <xsd:import schemaLocation="http://localhost:14088/TrainingService/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Common.Data.Statistics" />
+      <xsd:import schemaLocation="http://localhost:14088/TrainingService/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServiceInterface_LoginToMaster_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginToMaster" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_LoginToMaster_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginToMasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_PingServer_InputMessage">
+    <wsdl:part name="parameters" element="tns:PingServer" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_PingServer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingServerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_LoginToLecter_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginToLecter" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_LoginToLecter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginToLecterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_LogoutByStudent_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutByStudent" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_LogoutByStudent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutByStudentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_LogoutByTeacher_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutByTeacher" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_LogoutByTeacher_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutByTeacherResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_ValidateConnect_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateConnect" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_ValidateConnect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateConnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_GetAllGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllGroups" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_GetAllGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_GetAllTeachers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTeachers" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_GetAllTeachers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTeachersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_GetStudentsByGroupId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStudentsByGroupId" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_GetStudentsByGroupId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStudentsByGroupIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_DeleteTeacher_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTeacher" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_DeleteTeacher_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTeacherResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_DeleteStudent_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStudent" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_DeleteStudent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStudentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_UpdateTeacherName_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTeacherName" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_UpdateTeacherName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTeacherNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_UpdateTeacherPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTeacherPassword" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_UpdateTeacherPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTeacherPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_UpdateStudent_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStudent" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_UpdateStudent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStudentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_CreateTeacher_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTeacher" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_CreateTeacher_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTeacherResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_CreateStudent_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateStudent" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_CreateStudent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateStudentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_ValidateTeacherLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateTeacherLogin" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_ValidateTeacherLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateTeacherLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_CreateGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGroup" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_CreateGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_UpdateGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGroup" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_UpdateGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_DeleteGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroup" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_DeleteGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_CreateStatistic_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateStatistic" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_CreateStatistic_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateStatisticResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_UpdateStatistic_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStatistic" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_UpdateStatistic_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStatisticResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_GetDifficultyStatistic_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDifficultyStatistic" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_GetDifficultyStatistic_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDifficultyStatisticResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_GetStudentModuleStatistic_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStudentModuleStatistic" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_GetStudentModuleStatistic_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStudentModuleStatisticResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_IsAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInterface_IsAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsAdminResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServiceInterface">
+    <wsdl:operation name="LoginToMaster">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/LoginToMaster" message="tns:IServiceInterface_LoginToMaster_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/LoginToMasterResponse" message="tns:IServiceInterface_LoginToMaster_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PingServer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/PingServer" message="tns:IServiceInterface_PingServer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/PingServerResponse" message="tns:IServiceInterface_PingServer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginToLecter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/LoginToLecter" message="tns:IServiceInterface_LoginToLecter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/LoginToLecterResponse" message="tns:IServiceInterface_LoginToLecter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LogoutByStudent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/LogoutByStudent" message="tns:IServiceInterface_LogoutByStudent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/LogoutByStudentResponse" message="tns:IServiceInterface_LogoutByStudent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LogoutByTeacher">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/LogoutByTeacher" message="tns:IServiceInterface_LogoutByTeacher_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/LogoutByTeacherResponse" message="tns:IServiceInterface_LogoutByTeacher_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateConnect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/ValidateConnect" message="tns:IServiceInterface_ValidateConnect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/ValidateConnectResponse" message="tns:IServiceInterface_ValidateConnect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/GetAllGroups" message="tns:IServiceInterface_GetAllGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/GetAllGroupsResponse" message="tns:IServiceInterface_GetAllGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTeachers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/GetAllTeachers" message="tns:IServiceInterface_GetAllTeachers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/GetAllTeachersResponse" message="tns:IServiceInterface_GetAllTeachers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStudentsByGroupId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/GetStudentsByGroupId" message="tns:IServiceInterface_GetStudentsByGroupId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/GetStudentsByGroupIdResponse" message="tns:IServiceInterface_GetStudentsByGroupId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTeacher">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/DeleteTeacher" message="tns:IServiceInterface_DeleteTeacher_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/DeleteTeacherResponse" message="tns:IServiceInterface_DeleteTeacher_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStudent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/DeleteStudent" message="tns:IServiceInterface_DeleteStudent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/DeleteStudentResponse" message="tns:IServiceInterface_DeleteStudent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTeacherName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/UpdateTeacherName" message="tns:IServiceInterface_UpdateTeacherName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/UpdateTeacherNameResponse" message="tns:IServiceInterface_UpdateTeacherName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTeacherPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/UpdateTeacherPassword" message="tns:IServiceInterface_UpdateTeacherPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/UpdateTeacherPasswordResponse" message="tns:IServiceInterface_UpdateTeacherPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStudent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/UpdateStudent" message="tns:IServiceInterface_UpdateStudent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/UpdateStudentResponse" message="tns:IServiceInterface_UpdateStudent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTeacher">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/CreateTeacher" message="tns:IServiceInterface_CreateTeacher_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/CreateTeacherResponse" message="tns:IServiceInterface_CreateTeacher_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateStudent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/CreateStudent" message="tns:IServiceInterface_CreateStudent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/CreateStudentResponse" message="tns:IServiceInterface_CreateStudent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateTeacherLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/ValidateTeacherLogin" message="tns:IServiceInterface_ValidateTeacherLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/ValidateTeacherLoginResponse" message="tns:IServiceInterface_ValidateTeacherLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/CreateGroup" message="tns:IServiceInterface_CreateGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/CreateGroupResponse" message="tns:IServiceInterface_CreateGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/UpdateGroup" message="tns:IServiceInterface_UpdateGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/UpdateGroupResponse" message="tns:IServiceInterface_UpdateGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/DeleteGroup" message="tns:IServiceInterface_DeleteGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/DeleteGroupResponse" message="tns:IServiceInterface_DeleteGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateStatistic">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/CreateStatistic" message="tns:IServiceInterface_CreateStatistic_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/CreateStatisticResponse" message="tns:IServiceInterface_CreateStatistic_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatistic">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/UpdateStatistic" message="tns:IServiceInterface_UpdateStatistic_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/UpdateStatisticResponse" message="tns:IServiceInterface_UpdateStatistic_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDifficultyStatistic">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/GetDifficultyStatistic" message="tns:IServiceInterface_GetDifficultyStatistic_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/GetDifficultyStatisticResponse" message="tns:IServiceInterface_GetDifficultyStatistic_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStudentModuleStatistic">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/GetStudentModuleStatistic" message="tns:IServiceInterface_GetStudentModuleStatistic_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/GetStudentModuleStatisticResponse" message="tns:IServiceInterface_GetStudentModuleStatistic_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInterface/IsAdmin" message="tns:IServiceInterface_IsAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInterface/IsAdminResponse" message="tns:IServiceInterface_IsAdmin_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IServiceInterface" type="tns:IServiceInterface">
+    <wsp:PolicyReference URI="#NetTcpBinding_IServiceInterface_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="LoginToMaster">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/LoginToMaster" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PingServer">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/PingServer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginToLecter">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/LoginToLecter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogoutByStudent">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/LogoutByStudent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogoutByTeacher">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/LogoutByTeacher" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateConnect">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/ValidateConnect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGroups">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/GetAllGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTeachers">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/GetAllTeachers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStudentsByGroupId">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/GetStudentsByGroupId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTeacher">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/DeleteTeacher" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStudent">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/DeleteStudent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTeacherName">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/UpdateTeacherName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTeacherPassword">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/UpdateTeacherPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStudent">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/UpdateStudent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTeacher">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/CreateTeacher" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateStudent">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/CreateStudent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateTeacherLogin">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/ValidateTeacherLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/CreateGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/UpdateGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/DeleteGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateStatistic">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/CreateStatistic" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatistic">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/UpdateStatistic" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDifficultyStatistic">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/GetDifficultyStatistic" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStudentModuleStatistic">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/GetStudentModuleStatistic" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAdmin">
+      <soap12:operation soapAction="http://tempuri.org/IServiceInterface/IsAdmin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="NetTcpBinding_IServiceInterface" binding="tns:NetTcpBinding_IServiceInterface">
+      <soap12:address location="net.tcp://localhost:52500/TrainingService/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:52500/TrainingService/</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>GaryNevilePC\GaryNevile</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
