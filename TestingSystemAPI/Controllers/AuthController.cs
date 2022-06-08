@@ -7,10 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -44,10 +42,6 @@ namespace TestingSystemAPI.Controllers
             if (user == null) return new BadRequestObjectResult("пользователь не найден");
             if (_userService.CheckPassword(user, password))
             {
-                #region JWT Auth
-                //var tokenString = GenerateJwtToken(login);
-                //return new OkObjectResult(new { Token = tokenString, Message = "Success" });
-                #endregion
                 #region Cookie Auth
                 var claims = new List<Claim>
                 {
@@ -84,24 +78,5 @@ namespace TestingSystemAPI.Controllers
             await _httpContext.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return new OkResult();
         }
-
-
-        //private string GenerateJwtToken(string userName)
-        //{
-        //    var tokenHandler = new JwtSecurityTokenHandler();
-        //    var key = Encoding.ASCII.GetBytes(_configuration["Jwt:key"]);
-        //    var tokenDescriptor = new SecurityTokenDescriptor
-        //    {
-        //        Subject = new ClaimsIdentity(new[] { new Claim("id", userName) }),
-        //        Expires = DateTime.UtcNow.AddHours(1),
-        //        Issuer = _configuration["Jwt:Issuer"],
-        //        Audience = _configuration["Jwt:Audience"],
-        //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-        //    };
-        //    var token = tokenHandler.CreateToken(tokenDescriptor);
-        //    return tokenHandler.WriteToken(token);
-        //}
-
-
     }
 }

@@ -29,15 +29,13 @@ namespace TestingSystemAPI
         {
             services.AddCors( b => b
             .AddPolicy("Credentials", options => options
-                    .WithOrigins("http://localhost:3000")
+                    .WithOrigins(Configuration.GetValue<string>("ClientHost"))
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()));
             services.AddHttpContextAccessor();
             services.AddControllers();
             services.AddSingleton(ControllersFactory.Instance.ContentBC);
-            services.AddSingleton(ControllersFactory.Instance.StatisticBC);
-            services.AddSingleton(ControllersFactory.Instance.UserBC);
             services.AddDbContext<UserDbContext>(o => o.UseNpgsql(Configuration.GetConnectionString("postgress")));
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IModuleService, ModuleService>();
@@ -56,31 +54,6 @@ namespace TestingSystemAPI
                     };
                 });
             #endregion
-            #region JWT_Authentication
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(options =>
-            //{
-            //    /*options.RequireHttpsMetadata = true;*/
-            //    options.SaveToken = true;
-            //    options.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateLifetime = false,
-
-            //        ValidateIssuer = true,
-            //        ValidIssuer = Configuration["Jwt:Issuer"],
-
-            //        ValidateIssuerSigningKey = true,
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])),
-
-            //        ValidateAudience = true,
-            //        ValidAudience = Configuration["Jwt:Audience"]
-
-            //    };
-            //});
-            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,7 +70,6 @@ namespace TestingSystemAPI
 
             app.UseAuthentication();
             app.UseAuthorization();
-            //app.UseMiddleware<JWTMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

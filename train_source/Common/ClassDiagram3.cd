@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Common.Data.Content.Test">
-    <Position X="1.25" Y="0.5" Width="1.5" />
+    <Position X="1.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgQAAAAgAAAAEAAAAAAAAAAAAAEAQBICAAAAAA=</HashCode>
+      <HashCode>AAAAAAgQIAAAgAAAAEAAAAAAAAAAAAAEAQBICAAAAAA=</HashCode>
       <FileName>Data\Content\Test.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -13,7 +13,7 @@
   <Class Name="Common.Data.Content.PictureTest">
     <Position X="3.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAAAwAAAAEAAACAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAACIAAAwAAAAEAAACAAAAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Data\Content\PictureTest.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -31,7 +31,7 @@
     </ShowAsAssociation>
   </Class>
   <Enum Name="Common.Data.Content.TheoryTestType">
-    <Position X="3.5" Y="0.5" Width="1.5" />
+    <Position X="3.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAAAAAAAAABEBAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Data\Content\TheoryTestType.cs</FileName>

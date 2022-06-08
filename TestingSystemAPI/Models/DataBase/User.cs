@@ -19,7 +19,6 @@ namespace TestingSystemAPI.Models.DataBase
         public string HashedPassword { get; set; }
         [Required]
         public string Role { get; set; }
-        public string Token { get; set; }
 
     }
 }

@@ -38,7 +38,7 @@ namespace Controllers
             var practiceTests = lessons.Select(x => ControllersFactory.Instance.ContentBC.LoadPracticeTest(x)).Where(x => x.ID != Guid.Empty).ToList();
 
             if (UserController.IsConnected)
-                return m_statisticProxy.GetStudentModuleStatistic(lessons, theoryTests, practiceTests, _groupId);            
+                return m_statisticProxy.GetStudentModuleStatistic(lessons, theoryTests, practiceTests, _groupId);
             else
                 return getLocalStudentModuleStatistic(lessons, theoryTests, practiceTests);
         }
@@ -60,18 +60,18 @@ namespace Controllers
                     var practiceTest = _practiceTests.FirstOrDefault(x => x.LessonId == lesson.ID);
                     var lessonStat = new LessonResultStatistic
                     {
-                         HasTheoryStatistic = false, 
-                         AttemptsCount = 0, 
-                         BestTheoryResult = 0, 
-                         HasPracticeStatistic = false, 
-                         PracticeResult = 0, 
+                        HasTheoryStatistic = false,
+                        AttemptsCount = 0,
+                        BestTheoryResult = 0,
+                        HasPracticeStatistic = false,
+                        PracticeResult = 0,
                     };
-                                        
-                    if(theoryTest != null )
+
+                    if (theoryTest != null)
                     {
                         var theoryStats = allLocalStatistic.Where(x => x.StudentName == student && x.TestId == theoryTest.ID && x.Result != -1).ToList();
-                        if(theoryStats.Any())
-                        {                            
+                        if (theoryStats.Any())
+                        {
                             lessonStat.HasTheoryStatistic = true;
                             lessonStat.BestTheoryResult = theoryStats.Max(x => x.Result);
                             lessonStat.AttemptsCount = theoryStats.Count;
@@ -87,7 +87,7 @@ namespace Controllers
                             lessonStat.PracticeResult = practiceStats.Max(x => x.Result);
                         }
                     }
-                    
+
                     stat.LessonsStatistic.Add(lesson.ID, lessonStat);
                 }
                 if (stat.LessonsStatistic.Values.Where(x => x.HasTheoryStatistic).Any())
