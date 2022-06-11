@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestingSystemAPI.Models
 {
-    public class LessonModel
+    public class LessonDTO
     {
         public Guid ID { get; set; }
 
@@ -30,7 +30,7 @@ namespace TestingSystemAPI.Models
         /// </summary>
         public int Number { get; set; }
 
-        public LessonModel(Lesson lesson)
+        public LessonDTO(Lesson lesson)
         {
             ID = lesson.ID;
             ModuleID = lesson.ModuleID;

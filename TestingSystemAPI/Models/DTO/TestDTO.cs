@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestingSystemAPI.Models
 {
-    public class TestModel
+    public class TestDTO
     {
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace TestingSystemAPI.Models
         
         public string[] Answers { get; set; }
 
-        public TestModel(Test test)
+        public TestDTO(Test test)
         {
             if (test.Type == TheoryTestType.InputTest)
             {

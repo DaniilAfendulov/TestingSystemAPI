@@ -32,18 +32,18 @@ namespace TestingSystemAPI.Services
             return _contentController.LoadLessons(moduleId);
         }
 
-        public ModuleInfo GetModuleInfo(Guid moduleId)
+        public ModuleInfoDTO GetModuleInfo(Guid moduleId)
         {
-            return new ModuleInfo()
+            return new ModuleInfoDTO()
             {
                 Module = FindModule(moduleId),
                 Lessons = GetModuleLessons(moduleId)
             };
         }
 
-        public Lesson GetLesson(Guid moduleId, Guid id)
+        public Lesson GetLesson(Guid moduleId, Guid lessonId)
         {
-            return GetModuleLessons(moduleId).FirstOrDefault(l => l.ID == id);
+            return GetModuleLessons(moduleId).FirstOrDefault(l => l.ID == lessonId);
         }
 
         public Video GetVideo(Lesson lesson)
@@ -61,14 +61,19 @@ namespace TestingSystemAPI.Services
             return _contentController.LoadTheoryTest(lesson);
         }
 
-        public IEnumerable<TestModel> GetTheoryTests(Guid moduleId, Guid id)
+        public IEnumerable<TestDTO> GetTheoryTests(Guid moduleId, Guid id)
         {
-            return GetTests(moduleId, id).Select(test => new TestModel(test));
+            return GetTests(moduleId, id).Select(test => new TestDTO(test));
         }
 
-        public List<Test> GetTests(Guid moduleId, Guid id)
+        public List<Test> GetTests(Guid moduleId, Guid lessonId)
         {
-            return GetTests(GetLesson(moduleId, id));
+            var lesson = GetLesson(moduleId, lessonId);
+            if (lesson == null)
+            {
+                return new List<Test>();
+            }
+            return GetTests(lesson);
         }
 
         public List<Test> GetTests(Lesson lesson)
@@ -81,11 +86,11 @@ namespace TestingSystemAPI.Services
             return _contentController.LoadTests(theoryTest);
         }
 
-        public LessonInfo GetLessonInfo(Guid moduleId, Guid id)
+        public LessonInfoDTO GetLessonInfo(Guid moduleId, Guid id)
         {
             Lesson lesson = GetLesson(moduleId, id);
             if (lesson == null) return null;
-            return new LessonInfo()
+            return new LessonInfoDTO()
             {
                 ID = lesson.ID,
                 ModuleID = lesson.ModuleID,
@@ -96,6 +101,30 @@ namespace TestingSystemAPI.Services
             };
         }
 
+        public int CheckTests(List<Test> tests, IEnumerable<AnswerDTO> answers)
+        {
+            if (tests == null || tests.Count == 0 || answers.Count() != tests.Count) return 0;
+            Dictionary<Guid, Test> dictionaryTests = tests.ToDictionary(t => t.ID);
+            if (!answers.All(ans => dictionaryTests.ContainsKey(ans.ID)))
+            {
+                return 0;
+            }
+            return answers.Aggregate(0, 
+                (acc, next) =>
+                    acc + (CheckTest(dictionaryTests[next.ID], next.Answers) ? 1 : 0),
+                res => 100 * res / tests.Count);
+        }
 
+        public bool CheckTest(Test test, IEnumerable<string> answers)
+        {
+            if (test.CorrectAnswers.Count != answers.Count()) return false;
+            return test.CorrectAnswers.All(ans => answers.Contains(ans));
+        }
+
+        public int CheckTests(Guid moduleId, Guid lessonId, IEnumerable<AnswerDTO> answers)
+        {
+            List<Test> tests = GetTests(moduleId, lessonId);
+            return CheckTests(tests, answers);
+        }
     }
 }

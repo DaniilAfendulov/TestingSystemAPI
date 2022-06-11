@@ -21,21 +21,15 @@ namespace TestingSystemAPI.Models
         }
 
         [HttpGet]
-        public ModuleInfo Get(Guid id)
+        public ModuleInfoDTO Get(Guid id)
         {
             return _moduleService.GetModuleInfo(id);
         }
 
         [HttpGet]
-        public LessonInfo GetLessonInfo(Guid moduleId, Guid id)
+        public LessonInfoDTO GetLessonInfo(Guid moduleId, Guid id)
         {
             return _moduleService.GetLessonInfo(moduleId, id);
-        }
-
-        [HttpGet]
-        public IEnumerable<TestModel> GetTests(Guid moduleId, Guid id)
-        {
-            return _moduleService.GetTheoryTests(moduleId, id);
         }
     }
 }

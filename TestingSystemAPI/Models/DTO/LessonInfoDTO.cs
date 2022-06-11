@@ -7,7 +7,7 @@ using Controllers;
 
 namespace TestingSystemAPI.Models
 {
-    public class LessonInfo
+    public class LessonInfoDTO
     {
         public Guid ID { get; set; }
 

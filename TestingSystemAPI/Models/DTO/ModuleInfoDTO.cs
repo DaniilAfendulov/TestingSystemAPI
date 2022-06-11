@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestingSystemAPI.Models
 {
-    public class ModuleInfo
+    public class ModuleInfoDTO
     {
         public Module Module { get; set; }
         public List<Lesson> Lessons { get; set; }        
