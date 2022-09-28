@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System;
 
 namespace TestingSystemAPI
 {
@@ -52,6 +53,7 @@ namespace TestingSystemAPI
                         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                         return Task.CompletedTask;
                     };
+                    options.ExpireTimeSpan = TimeSpan.FromHours(1);
                 });
             #endregion
         }
